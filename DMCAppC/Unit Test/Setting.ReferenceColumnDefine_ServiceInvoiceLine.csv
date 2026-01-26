@@ -1,0 +1,15 @@
+﻿ReferenceColumnDefineId;VersionId;SourceReferenceTableDefineId;SourceTableName;SourceColumnId;SourceColumnFunction;RefReferenceTableDefineId;RefTableName;RefColumnId;RefColumnName;RefColumnFunction;KeySortNo;Description;ModifiedAt;ModifiedBy;Deleted
+4812;1;3801;dimServiceInvoiceLine;2781;NULL;3802;RefCustomer_No;11140;CompanyId;NULL;1;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4813;1;3801;dimServiceInvoiceLine;2781;NULL;3802;RefCustomer_No;11140;CompanyId;NULL;1;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4814;1;3801;dimServiceInvoiceLine;2781;NULL;3803;RefCustomer_No;11140;CompanyId;NULL;1;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4815;1;3801;dimServiceInvoiceLine;2781;NULL;3803;RefCustomer_No;11140;CompanyId;NULL;1;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4816;1;3801;dimServiceInvoiceLine;2781;NULL;3804;RefItemCategory_Code;4713;CompanyId;NULL;1;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4817;1;3801;dimServiceInvoiceLine;2781;NULL;3805;RefServiceItem_No;10005;CompanyId;NULL;1;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4818;1;3801;dimServiceInvoiceLine;11132;NULL;3802;RefCustomer_No;11141;No;NULL;2;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4819;1;3801;dimServiceInvoiceLine;11138;NULL;3802;RefCustomer_No;11141;No;NULL;2;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4820;1;3801;dimServiceInvoiceLine;11132;NULL;3803;RefCustomer_No;11141;No;NULL;2;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4821;1;3801;dimServiceInvoiceLine;11138;NULL;3803;RefCustomer_No;11141;No;NULL;2;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4822;1;3801;dimServiceInvoiceLine;2836;NULL;3804;RefItemCategory_Code;4714;Code;NULL;2;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4823;1;3801;dimServiceInvoiceLine;2839;NULL;3805;RefServiceItem_No;10006;No;NULL;2;NULL;2026-01-24 14:00:25.093;TA\jakevit1;0
+4824;1;3801;ServiceInvoiceLine;2635;NULL;3801;dimServiceInvoiceLine;2780;ServiceInvoiceLineId;NULL;1;NULL;2026-01-26 10:46:57.170;TA\jakevit1;0
+4825;1;3801;ServiceInvoiceLine;2636;NULL;3801;dimServiceInvoiceLine;2781;ServiceInvoiceLineId;@CompanyId;2;NULL;2026-01-26 11:00:33.590;TA\jakevit1;0
