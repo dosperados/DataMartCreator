@@ -1,23 +1,38 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Windows;
+using DMCApp.ViewModels;
+using DMCApp.Views;
+using Wpf.Ui.Controls;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace DMCApp.ViewModels
+namespace DMCApp;
+
+public partial class MainWindow : FluentWindow
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    private readonly MainViewModel _viewModel;
+    private readonly IServiceProvider _serviceProvider;
+
+    public MainWindow(MainViewModel viewModel, IServiceProvider serviceProvider)
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        InitializeComponent();
+        _viewModel = viewModel;
+        _serviceProvider = serviceProvider;
+        DataContext = _viewModel;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        _viewModel.RequestOpenWizard += OnRequestOpenWizard;
+    }
 
-        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+    private void OnRequestOpenWizard()
+    {
+        // Resolve WizardViewModel and View
+        var wizardVM = _serviceProvider.GetRequiredService<WizardViewModel>();
+        var wizardWindow = new WizardView
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
+            Owner = this,
+            DataContext = wizardVM
+        };
+
+        wizardVM.CloseAction = () => wizardWindow.Close();
+
+        wizardWindow.ShowDialog();
     }
 }

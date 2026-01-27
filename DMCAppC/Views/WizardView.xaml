@@ -1,0 +1,84 @@
+<ui:FluentWindow x:Class="DMCApp.Views.WizardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:vm="clr-namespace:DMCApp.ViewModels"
+        mc:Ignorable="d"
+        Title="Add New Table" Height="600" Width="900"
+        ExtendsContentIntoTitleBar="True"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="{Binding CurrentStep, StringFormat='Step {0}'}" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <!-- Step 1 -->
+        <Grid Grid.Row="1" Visibility="{Binding CurrentStep, Converter={StaticResource StepToVisibilityConverter}, ConverterParameter=1}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Source DB:" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox Grid.Column="1" Margin="5" IsEditable="True" ItemsSource="{Binding SourceDBs}" SelectedItem="{Binding SelectedSourceDB}" Text="{Binding SourceDBText}"/>
+
+            <TextBlock Grid.Row="1" Text="Source Schema:" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox Grid.Row="1" Grid.Column="1" Margin="5" IsEditable="True" ItemsSource="{Binding SourceSchemas}" SelectedItem="{Binding SelectedSourceSchema}" Text="{Binding SourceSchemaText}"/>
+
+            <TextBlock Grid.Row="2" Text="Source Table:" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" Margin="5" IsEditable="True" ItemsSource="{Binding SourceTables}" DisplayMemberPath="TableName" SelectedItem="{Binding SelectedSourceTable}" Text="{Binding SourceTableText}"/>
+
+            <TextBlock Grid.Row="3" Text="Dest DB:" VerticalAlignment="Center" Margin="5"/>
+            <ui:TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding DestDB}"/>
+
+            <TextBlock Grid.Row="4" Text="Dest Schema:" VerticalAlignment="Center" Margin="5"/>
+            <ui:TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding DestSchema}"/>
+
+            <TextBlock Grid.Row="5" Text="Dest Table:" VerticalAlignment="Center" Margin="5"/>
+            <ui:TextBox Grid.Row="5" Grid.Column="1" Margin="5" Text="{Binding DestTable}"/>
+
+            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Vertical" Margin="5">
+                <CheckBox Content="Add OptionId Column" IsChecked="{Binding AddOptionIdColumn}"/>
+                <CheckBox Content="Add @CompanyId Column" IsChecked="{Binding AddCompanyIdColumn}"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Step 2 -->
+        <Grid Grid.Row="1" Visibility="{Binding CurrentStep, Converter={StaticResource StepToVisibilityConverter}, ConverterParameter=2}">
+            <DataGrid ItemsSource="{Binding Columns}" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Source" Binding="{Binding SourceColumnName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Dest" Binding="{Binding DestColumnName}"/>
+                    <DataGridTextColumn Header="Type" Binding="{Binding DataType}"/>
+                    <DataGridCheckBoxColumn Header="Nullable" Binding="{Binding IsNullable}"/>
+                    <DataGridCheckBoxColumn Header="Option?" Binding="{Binding IsOptionField}" IsReadOnly="True"/>
+                    <DataGridCheckBoxColumn Header="Add?" Binding="{Binding AddToDest}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Footer Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <ui:Button Content="Back" Command="{Binding BackCommand}" Margin="5"/>
+            <ui:Button Content="Next" Command="{Binding NextCommand}" Margin="5" Visibility="{Binding CurrentStep, Converter={StaticResource StepToVisibilityConverter}, ConverterParameter=1}"/>
+            <ui:Button Content="Finish" Command="{Binding FinishCommand}" Margin="5" Appearance="Primary" Visibility="{Binding CurrentStep, Converter={StaticResource StepToVisibilityConverter}, ConverterParameter=2}"/>
+            <ui:Button Content="Cancel" Command="{Binding CancelCommand}" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</ui:FluentWindow>
