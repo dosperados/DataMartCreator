@@ -1,0 +1,55 @@
+<UserControl x:Class="DMCApp.Views.TableEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:vm="clr-namespace:DMCApp.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{Binding Header}" FontSize="24" Margin="10"/>
+
+        <TabControl Grid.Row="1" Margin="10">
+            <TabItem Header="Reference Tables">
+                <ui:DataGrid ItemsSource="{Binding ReferenceTables}" AutoGenerateColumns="False">
+                    <ui:DataGrid.Columns>
+                        <DataGridTextColumn Header="Ref Table Name" Binding="{Binding RefTableName}"/>
+                        <DataGridTextColumn Header="Ref Type" Binding="{Binding RefType}"/>
+                        <DataGridTextColumn Header="Join Type" Binding="{Binding JoinType}"/>
+                    </ui:DataGrid.Columns>
+                </ui:DataGrid>
+            </TabItem>
+            <TabItem Header="Reference Columns">
+                <ui:DataGrid ItemsSource="{Binding ReferenceColumns}" AutoGenerateColumns="False">
+                    <ui:DataGrid.Columns>
+                        <DataGridTextColumn Header="Source Col" Binding="{Binding SourceColumnName}"/>
+                        <DataGridTextColumn Header="Dest Col" Binding="{Binding DestColumnName}"/>
+                        <DataGridTextColumn Header="Data Type" Binding="{Binding DataType}"/>
+                        <!-- Lookup Column -->
+                         <DataGridComboBoxColumn Header="Ref Table"
+                                                SelectedValueBinding="{Binding ReferenceTableId}"
+                                                SelectedValuePath="TableDefineId"
+                                                DisplayMemberPath="DestMainTableName">
+                             <DataGridComboBoxColumn.ElementStyle>
+                                 <Style TargetType="ComboBox">
+                                     <Setter Property="ItemsSource" Value="{Binding DataContext.AvailableTables, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                 </Style>
+                             </DataGridComboBoxColumn.ElementStyle>
+                             <DataGridComboBoxColumn.EditingElementStyle>
+                                 <Style TargetType="ComboBox">
+                                     <Setter Property="ItemsSource" Value="{Binding DataContext.AvailableTables, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                 </Style>
+                             </DataGridComboBoxColumn.EditingElementStyle>
+                         </DataGridComboBoxColumn>
+                    </ui:DataGrid.Columns>
+                </ui:DataGrid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
