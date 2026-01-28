@@ -112,7 +112,7 @@ public partial class WizardViewModel : ObservableObject
         var connStr = _settingsService.GetConnectionString("SourceDbExample"); // Use a default or look it up
         // In reality, we might need a connection string per DB name.
         // For this task, I'll assume one connection string for TADWH.
-        connStr = _settingsService.GetConnectionString("DWPROD_DestWindowsAuth").Replace("TADM", value);
+        connStr = _settingsService.GetConnectionString("DestDbExample");
 
         try
         {
@@ -139,7 +139,7 @@ public partial class WizardViewModel : ObservableObject
 
     private async Task LoadTablesAsync()
     {
-        var connStr = _settingsService.GetConnectionString("DWPROD_DestWindowsAuth").Replace("TADM", SelectedSourceDB ?? "TADWH");
+        var connStr = _settingsService.GetConnectionString("DestDbExample");
         try
         {
             var tables = await _metadataService.GetTablesAsync(connStr, SelectedSourceSchema ?? "dbo", SourceTableText ?? "");
@@ -183,7 +183,7 @@ public partial class WizardViewModel : ObservableObject
 
     private async Task LoadColumnsAsync()
     {
-        var connStr = _settingsService.GetConnectionString("DWPROD_DestWindowsAuth").Replace("TADM", SelectedSourceDB ?? "TADWH");
+        var connStr = _settingsService.GetConnectionString("DestDbExample");
         var rawColumns = await _metadataService.GetSourceColumnsAsync(connStr, SelectedSourceDB, SelectedSourceSchema, SourceTableText);
 
         IEnumerable<ActiveOptionList> aolList = new List<ActiveOptionList>();
@@ -288,8 +288,8 @@ public partial class WizardViewModel : ObservableObject
     private async Task OnFinishAsync()
     {
         // Transactional Save
-        var sourceConnStr = _settingsService.GetConnectionString("DWPROD_DestWindowsAuth").Replace("TADM", SelectedSourceDB ?? "TADWH");
-        var destConnStr = _settingsService.GetConnectionString("DestDbWindowsAuth");
+        var sourceConnStr = _settingsService.GetConnectionString("SourceDbExample");
+        var destConnStr = _settingsService.GetConnectionString("DestDbExample");
 
         var tableDef = new TableDefinition
         {
