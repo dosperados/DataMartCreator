@@ -189,7 +189,8 @@ public partial class WizardViewModel : ObservableObject
         IEnumerable<ActiveOptionList> aolList = new List<ActiveOptionList>();
         if (AddOptionIdColumn)
         {
-             aolList = await _metadataService.GetAolAsync(connStr, SourceTableText);
+             // Use TADWH connection string for AOL lookup
+             aolList = await _metadataService.GetAolAsync(tadwhConnStr, SourceTableText);
         }
 
         Columns.Clear();
