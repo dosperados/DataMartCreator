@@ -8,7 +8,8 @@
         xmlns:vm="clr-namespace:DMCApp.ViewModels"
         mc:Ignorable="d"
         Title="DMCApp" Height="800" Width="1200"
-        ExtendsContentIntoTitleBar="True">
+        ExtendsContentIntoTitleBar="True"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:TableEditorViewModel}">
@@ -17,14 +18,25 @@
     </Window.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <ui:TitleBar
+            Grid.Row="0" 
+            Grid.ColumnSpan="4"
+            Title="DMCApp Manager"
+            Icon="pack://application:,,,/Assets/applicationIcon.ico" />
+
         <!-- Sidebar -->
-        <TabControl Grid.Column="0">
+        <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1">
             <TabItem Header="TableDefine">
                 <views:TableDefineView DataContext="{Binding TableDefineVM}"/>
             </TabItem>
@@ -37,10 +49,10 @@
         </TabControl>
 
         <!-- Splitter -->
-        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="Gray"/>
+        <GridSplitter Grid.Row="1" Grid.Column="2" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="Gray"/>
 
         <!-- Workspace -->
-        <ui:TabView Grid.Column="2" x:Name="MainTabs" ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab}">
+        <ui:TabView Grid.Row="1" Grid.Column="3" x:Name="MainTabs" ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab}">
              <ui:TabView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Header}" />
