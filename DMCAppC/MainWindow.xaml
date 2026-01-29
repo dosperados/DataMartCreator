@@ -24,7 +24,6 @@
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="350"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -37,7 +36,7 @@
             Icon="pack://application:,,,/Assets/applicationIcon.ico" />
 
         <!-- Sidebar -->
-        <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+        <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1">
             <TabItem Header="TableDefine">
                 <views:TableDefineView DataContext="{Binding TableDefineVM}"/>
             </TabItem>
