@@ -112,7 +112,7 @@ public partial class WizardViewModel : ObservableObject
         var connStr = _settingsService.GetConnectionString("SourceDbExample"); // Use a default or look it up
         // In reality, we might need a connection string per DB name.
         // For this task, I'll assume one connection string for TADWH.
-        connStr = _settingsService.GetConnectionString("DestDbExample");
+        connStr = _settingsService.GetConnectionString("DWPROD_DestWindowsAuth").Replace("TADM", value);
 
         try
         {
@@ -139,7 +139,7 @@ public partial class WizardViewModel : ObservableObject
 
     private async Task LoadTablesAsync()
     {
-        var connStr = _settingsService.GetConnectionString("DestDbExample");
+        var connStr = _settingsService.GetConnectionString("DWPROD_DestWindowsAuth").Replace("TADM", SelectedSourceDB ?? "TADWH");
         try
         {
             var tables = await _metadataService.GetTablesAsync(connStr, SelectedSourceSchema ?? "dbo", SourceTableText ?? "");
@@ -183,13 +183,17 @@ public partial class WizardViewModel : ObservableObject
 
     private async Task LoadColumnsAsync()
     {
-        var connStr = _settingsService.GetConnectionString("DestDbExample");
+        var connStr = _settingsService.GetConnectionString("DWPROD_DestWindowsAuth").Replace("TADM", SelectedSourceDB ?? "TADWH");
+        // TADWH connection string: replace TADM with TADWH in the default connection settings
+        var tadwhConnStr = _settingsService.GetConnectionString("DestDbWindowsAuth").Replace("TADM", "TADWH");
+
         var rawColumns = await _metadataService.GetSourceColumnsAsync(connStr, SelectedSourceDB, SelectedSourceSchema, SourceTableText);
 
         IEnumerable<ActiveOptionList> aolList = new List<ActiveOptionList>();
         if (AddOptionIdColumn)
         {
-             aolList = await _metadataService.GetAolAsync(connStr, SourceTableText);
+             // Use TADWH connection string for AOL lookup
+             aolList = await _metadataService.GetAolAsync(tadwhConnStr, SourceTableText);
         }
 
         Columns.Clear();
@@ -288,8 +292,8 @@ public partial class WizardViewModel : ObservableObject
     private async Task OnFinishAsync()
     {
         // Transactional Save
-        var sourceConnStr = _settingsService.GetConnectionString("SourceDbExample");
-        var destConnStr = _settingsService.GetConnectionString("DestDbExample");
+        var sourceConnStr = _settingsService.GetConnectionString("DWPROD_DestWindowsAuth").Replace("TADM", SelectedSourceDB ?? "TADWH");
+        var destConnStr = _settingsService.GetConnectionString("DestDbWindowsAuth");
 
         var tableDef = new TableDefinition
         {

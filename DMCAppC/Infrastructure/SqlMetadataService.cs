@@ -57,6 +57,7 @@ public class SqlMetadataService : IMetadataService
                ,CAST(isc.[ORDINAL_POSITION] as float) as [ColumnSortNo]
                ,sc.[column_id] as [SourceColumnId]
                ,sch.name as [DestSchemaName]
+               -- Auto-naming logic handled in C#, but initial fetch relies on raw names
                ,CAST(isc.[DATA_TYPE] as NVARCHAR(128)) as [DataType]
                ,Cast(isc.[CHARACTER_MAXIMUM_LENGTH] as INT) as [MaxLength]
                ,isc.[NUMERIC_PRECISION] as [Precision]
