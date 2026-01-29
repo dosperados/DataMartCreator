@@ -3,8 +3,7 @@
     "DestDbWindowsAuth": "Server=LOCALHOST;Database=TADM;Integrated Security=True;TrustServerCertificate=True;",
     "DWPROD_DestDbSqlAuth": "Server=SQLEDWPROD\\DWPROD;Database=TADM;User ID=your_sql_user;Password=your_sql_password;TrustServerCertificate=True;",
     "DWPROD_DestWindowsAuth": "Server=SQLEDWPROD\\DWPROD;Database=TADM;Integrated Security=True;TrustServerCertificate=True;",
-    "DestDbExample": "Server=LOCALHOST;Database=TADM;Integrated Security=True;TrustServerCertificate=True;",
-    "SourceDbExample": "Server=LOCALHOST;Database=TADWH;Integrated Security=True;TrustServerCertificate=True;"
+    "SourceDbExample": "Server=AnotherServer\\Instance;Database=SourceMetadataDB;Integrated Security=True;TrustServerCertificate=True;"
   },
   "AppSettings": {
     "SomeOtherSetting": "SomeValue"
