@@ -1,4 +1,0 @@
-﻿TableId;DBId;VersionId;TableName;SchemaName;Type;MainTableName;MainColumnName;Description;ModifiedAt;ModifiedBy;Deleted
-207;10;1;ServiceInvoiceLine;dbo;Source;NULL;NULL;Source;2025-01-27 11:29:37.143;TA\jakevit1;0
-208;11;1;dimServiceInvoiceLine;dbo;Dest;NULL;NULL;Dest;2025-01-27 11:29:37.143;TA\jakevit1;0
-565;10;1;ServiceInvoiceLine_AOL;dbo;OptionList;NULL;NULL;Source;2026-01-24 14:00:24.953;TA\jakevit1;0

@@ -1,5 +1,0 @@
-﻿DefaultTableReferenceId;SourceDBName;SourceSchemaName;SourceTableName;SourceColumnName;DestDBName;DestSchemaName;DestTableName;DestColumnName;RefDBName;RefTableName;RefSchemaName;RefColumnName;RefColumnIdName;AddRefDestColumnIdName;ModifiedAt;ModifiedBy;Deleted
-5000;TADWH;dbo;ServiceInvoiceLine;BilltoCustomerNo;TADM;dbo;dimServiceInvoiceLine;BilltoCustomerNo;TADWH;Customer;dbo;No;CustomerId;BilltoCustomerId;2025-12-11 12:09:01.837;TA\jakevit1;0
-5001;TADWH;dbo;ServiceInvoiceLine;CustomerNo;TADM;dbo;dimServiceInvoiceLine;SelltoCustomerNo;TADWH;Customer;dbo;No;CustomerId;SelltoCustomerId;2025-12-11 12:09:01.837;TA\jakevit1;0
-5002;TADWH;dbo;ServiceInvoiceLine;ItemCategoryCode;TADM;dbo;dimServiceInvoiceLine;ItemCategoryCode;TADWH;ItemCategory;dbo;Code;ItemCategoryId;ItemCategoryId;2025-12-11 12:09:01.837;TA\jakevit1;0
-5003;TADWH;dbo;ServiceInvoiceLine;ServiceItemNo;TADM;dbo;dimServiceInvoiceLine;ServiceItemNo;TADWH;ServiceItem;dbo;No;ServiceItemId;ServiceItemId;2025-12-11 12:09:01.837;TA\jakevit1;0
