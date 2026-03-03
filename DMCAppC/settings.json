@@ -1,4 +1,4 @@
-﻿{
+{
   "AppSettings": {
     "SomeOtherSetting": "SomeValue"
   },
@@ -6,5 +6,28 @@
     "Dest_DWPROD_SqlAuth": "Server=SQLEDWPROD\\DWPROD;Database=TADM;User ID=your_sql_user;Password=your_sql_password;TrustServerCertificate=True;",
     "DestDbExample": "Server=LOCALHOST;Database=TADM;Integrated Security=True;TrustServerCertificate=True;",
     "SourceDbExample": "Server=LOCALHOST;Database=TADWH;Integrated Security=True;TrustServerCertificate=True;"
-  }
+  },
+  "DataTypeMappings": [
+    {
+      "SourceType": "decimal",
+      "SourcePrecision": 38,
+      "TargetType": "decimal",
+      "TargetPrecision": 18,
+      "TargetScale": 2
+    },
+    {
+      "SourceNamePattern": ".*Date$",
+      "SourceType": "datetime",
+      "TargetType": "DATE"
+    }
+  ],
+  "DataTypeDefaults": [
+    { "Types": ["VARBINARY", "nvarchar", "char"], "MaxLength": 1, "Precision": null, "Scale": null, "Collation": "Latin1_General_CI_AS" },
+    { "Types": ["tinyint"], "MaxLength": null, "Precision": 3, "Scale": 0 },
+    { "Types": ["int"], "MaxLength": null, "Precision": 10, "Scale": 0 },
+    { "Types": ["bigint"], "MaxLength": null, "Precision": 19, "Scale": 0 },
+    { "Types": ["decimal"], "MaxLength": null, "Precision": 18, "Scale": 2 },
+    { "Types": ["DATE"], "MaxLength": null, "Precision": null, "Scale": null },
+    { "Types": ["uniqueidentifier"], "MaxLength": null, "Precision": null, "Scale": null }
+  ]
 }

@@ -19,43 +19,110 @@ public class TableDefinition
     public byte Deleted { get; set; }
 }
 
-public class ColumnDefinitionViewModel
+public partial class ColumnDefinitionViewModel : CommunityToolkit.Mvvm.ComponentModel.ObservableObject
 {
     // This model is used in the Wizard Step 2 grid
     // It maps to GetSourceColumn SQL result + some extra properties
 
-    public string SourceColumnName { get; set; } = string.Empty;
-    public string DestColumnName { get; set; } = string.Empty;
-    public double ColumnSortNo { get; set; }
-    public int SourceColumnId { get; set; } // column_id
-    public string DestSchemaName { get; set; } = string.Empty;
-    public string DataType { get; set; } = string.Empty;
-    public int? MaxLength { get; set; }
-    public int? Precision { get; set; }
-    public int? Scale { get; set; }
-    public bool IsNullable { get; set; }
-    public string CollationName { get; set; }
-    public string DefaultValue { get; set; }
-    public int KeySortNo { get; set; }
-    public string SourceKeyColumn { get; set; }
-    public string RefTableName { get; set; }
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _sourceColumnName = string.Empty;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _destColumnName = string.Empty;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private double _columnSortNo;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private int _sourceColumnId;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _destSchemaName = string.Empty;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _dataType = string.Empty;
+    partial void OnDataTypeChanged(string value)
+    {
+        // Add basic reactive smart type behavior similar to Settings defaults
+        if (value == "VARBINARY" || value == "nvarchar" || value == "char")
+        {
+             MaxLength = 1;
+             Precision = null;
+             Scale = null;
+             CollationName = "Latin1_General_CI_AS";
+        }
+        else if (value == "DATE" || value == "uniqueidentifier")
+        {
+             MaxLength = null;
+             Precision = null;
+             Scale = null;
+        }
+        else if (value == "int")
+        {
+             MaxLength = null;
+             Precision = 10;
+             Scale = 0;
+        }
+    }
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private int? _maxLength;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private int? _precision;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private int? _scale;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private bool _isNullable;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _collationName = string.Empty;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _defaultValue = string.Empty;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private int _keySortNo;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _sourceKeyColumn = string.Empty;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _refTableName = string.Empty;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _destKeyColumn = string.Empty;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private float? _refLevelNo;
 
     // Logic properties
-    public bool IsOptionField { get; set; }
-    public bool AddToDest { get; set; } = true;
-    public string FieldType { get; set; } = "Main"; // Main, OptionId, etc.
-    public bool IsBlacklisted { get; set; }
-    public bool IsNewVirtual { get; set; } // For AOL rows
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private bool _isOptionField;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private bool _addToDest = true;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private string _fieldType = "Main"; // Main, OptionId, etc.
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private bool _isBlacklisted;
+
+    [CommunityToolkit.Mvvm.ComponentModel.ObservableProperty]
+    private bool _isNewVirtual; // For AOL rows
 }
 
 public class ActiveOptionList
 {
-    public string TableNameDWH { get; set; }
-    public string FieldNameDWH { get; set; }
-    public string RefTableName { get; set; }
-    public string RefColumnName { get; set; }
+    public string TableNameDWH { get; set; } = string.Empty;
+    public string FieldNameDWH { get; set; } = string.Empty;
+    public string RefTableName { get; set; } = string.Empty;
+    public string RefColumnName { get; set; } = string.Empty;
     public long ColumnSortNo { get; set; }
-    public string OptionId { get; set; }
+    public string OptionId { get; set; } = string.Empty;
     public int TableNo { get; set; }
     public int FieldNo { get; set; }
 }

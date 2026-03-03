@@ -11,12 +11,6 @@
         ExtendsContentIntoTitleBar="True"
         WindowStartupLocation="CenterScreen">
 
-    <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:TableEditorViewModel}">
-            <views:TableEditorView/>
-        </DataTemplate>
-    </Window.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,41 +18,34 @@
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="350" MinWidth="200"/>
+            <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ui:TitleBar
-            Grid.Row="0" 
-            Grid.ColumnSpan="4"
-            Title="DMCApp Manager"
-            Icon="pack://application:,,,/Assets/applicationIcon.ico" />
+        <ui:TitleBar Grid.Row="0" Grid.ColumnSpan="3" Title="DMCApp" />
 
         <!-- Sidebar -->
-        <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1">
-            <TabItem Header="TableDefine">
+        <ui:TabView Grid.Row="1" Grid.Column="0">
+            <ui:TabViewItem Header="TableDefine">
                 <views:TableDefineView DataContext="{Binding TableDefineVM}"/>
-            </TabItem>
-            <TabItem Header="ViewDefine">
+            </ui:TabViewItem>
+            <ui:TabViewItem Header="ViewDefine">
                 <TextBlock Text="Stub: ViewDefine" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </TabItem>
-            <TabItem Header="IndexDefine">
+            </ui:TabViewItem>
+            <ui:TabViewItem Header="IndexDefine">
                 <TextBlock Text="Stub: IndexDefine" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </TabItem>
-        </TabControl>
+            </ui:TabViewItem>
+        </ui:TabView>
 
         <!-- Splitter -->
-        <GridSplitter Grid.Row="1" Grid.Column="2" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="Gray"/>
+        <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="{DynamicResource TextFillColorSecondaryBrush}"/>
 
         <!-- Workspace -->
-        <ui:TabView Grid.Row="1" Grid.Column="3" x:Name="MainTabs" ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab}">
-             <ui:TabView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Header}" />
-                </DataTemplate>
-            </ui:TabView.ItemTemplate>
-             <!-- Content Template stub -->
+        <ui:TabView Grid.Row="1" Grid.Column="2" x:Name="MainTabs">
+            <ui:TabViewItem Header="Workspace">
+                <TextBlock Text="Select an item from the sidebar or click Add New" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </ui:TabViewItem>
         </ui:TabView>
     </Grid>
 </ui:FluentWindow>
